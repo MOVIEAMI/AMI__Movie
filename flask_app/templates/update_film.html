@@ -1,0 +1,197 @@
+<!--
+=========================================================
+* Material Dashboard 2 - v3.0.4
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    Material Dashboard 2 by Creative Tim
+  </title>
+  <!--     Fonts and icons     -->
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900|Roboto+Slab:400,700" />
+  <!-- Nucleo Icons -->
+  <link href="../static/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="../static/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../static/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><h5>{{one_user.first_name}}</h5></li>
+            
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Update  New film</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group input-group-outline">
+              <label class="form-label"></label>
+              <input type="hidden" class="form-control">
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="#">AMI movies</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="/logout" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <label class="d-sm-inline d-none">Sign out</label>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container d-flex">
+      <div class="container d-flex">
+                  <!-- left -->
+                  <div class="container-fluid py-4 d-flex ml-0">
+                      <div class="card d-flex">
+                        <div class="card-body">
+                    
+                          <a href="/filmsales" class="btn btn-primary">reservation</a>
+                        </div>
+          
+                          
+                        <div>
+                          <div class="card">
+                            <div class="card-body">
+                              
+                              <a href="/dashbord" class="btn btn-primary">Dashboard</a>
+                            </div>
+                          </div>
+                        
+                      </div>
+                      </div>
+                  </div>
+          </div>
+
+
+        <div class="container-fluid py-4 d-flex ml-2" style="width :1500 px">
+            <div class="card d-flex">
+              <div>
+
+                <H3>Update film</H3>
+                <form action="/up/film" method="post" class="  p-5">
+                  {% with messages = get_flashed_messages(category_filter=["films"])  %} 
+                      <!-- declare a variable called messages -->
+                      
+                      {% if messages %}                            <!-- check if there are any messages -->
+                          {% for message in messages %}            <!-- loop through the messages -->
+                              <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                          {% endfor %}
+                      {% endif %}
+                  {% endwith %}
+                  <div >
+                      <input type="hidden" name="id" value={{film_one.id}}>
+                      <label class="form-label bg-light text-danger" id="inputGroup-sizing-default">name </label>
+                      <input type="text" class="form-control" aria-label="Sizing example input" name="name_film" value="{{film_one.name_film}}" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                  <div>
+                      <label class="form-label bg-light text-danger" id="inputGroup-sizing-default">director name</label>
+                      <input type="text" class="form-control" aria-label="Sizing example input" name="director_name"  value="{{film_one.director_name}}" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                  <div>
+                    <label class="form-label bg-light text-danger" id="inputGroup-sizing-default">Number of Tickets </label>
+                    <input type="text" class="form-control" aria-label="Sizing example input" name="number_tickets" value="{{film_one.number_tickets}}" aria-describedby="inputGroup-sizing-default">
+                </div>
+                  <div >
+                      <label class="form-label bg-light text-danger" id="inputGroup-sizing-default">price</label>
+                      <input type="text" class="form-control" aria-label="Sizing example input" name="price" value="{{film_one.price}}" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                  <div >
+                      <label class="form-label bg-light text-danger" id="inputGroup-sizing-default">URL image </label>
+                      <input type="text" class="form-control" aria-label="Sizing example input" name="url_image"  value="{{film_one.url_image}}" aria-describedby="inputGroup-sizing-default">
+                  </div>
+                  <div >
+                    <label for="floatingTextarea2" class="form-label bg-light text-danger" >About:</label>
+                      <textarea class="form-control" placeholder="Leave a comment here" name="description" id="floatingTextarea2" style="height: 100px"> {{film_one.description}}</textarea>
+                      
+                    </div>
+                    <div class="mb-3 opacity-50">
+                      <label for="disabledSelect" class="form-label bg-light text-danger" >sale</label>
+                      <select id="disabledSelect" name="broadcast_room" value={{film_one.broadcast_room}} class="form-select">
+                      <option selected value="Pathé">Pathé</option>
+                      <option value="Cinevog">Cinevog</option>
+                      <option value="Cinéma Le Parnasse">Cinéma Le Parnasse</option>
+                      <option value="L’Agora">L’Agora</option>
+                      <option value="Cinéma Le Colisée">Cinéma Le Colisée</option>
+                      <option value="Cine jamil">Cine jamil</option>
+                      <option value="Le Rio">Le Rio</option>
+                      <option value="Cinéma Le Palace Tunis">Cinéma Le Palace Tunis</option>
+                      <option value="Cinéma Amilcar">Cinéma Amilcar</option>
+                      <option value="Cinéma ABC">Cinéma ABCr</option>
+
+                      </select>
+                  </div>
+                  <div class="mb-3">
+                      <label for="disabledSelect"  class="form-label bg-light text-danger">category</label>
+                      <select id="disabledSelect" name="category_id" value={{film_one.category_id}} class="form-select">
+                      <option selected value="1">anime</option>
+                      <option value="2">action</option>
+                      <option value="3">aventures</option>
+                      <option value="4">comedie</option>
+                      </select>
+                  </div>
+                  <div  class="mb-3">
+                      <input type="datetime-local" id="meeting-time"
+                              name="broadcast_date" value="2022-11-17T19:30"
+                                  min="2022-11-16sT00:00" max="2050-12-30sT00:00">
+                   </div>
+                  <button type="submit" class="btn bg-light text-danger">Update film</button>
+              </form>
+              </div>
+            </div>
+
+        </div>
+          <!-- rigt -->
+
+
+
+
+        </div>
+        
+  </main>
+  <!--   Core JS Files   -->
+  <script src="../static/assets/js/core/popper.min.js"></script>
+  <script src="../static/assets/js/core/bootstrap.min.js"></script>
+  <script src="../static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../static/assets/js/plugins/chartjs.min.js"></script>
+  <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+  </script>
+
+
+</body>
+
+</html>

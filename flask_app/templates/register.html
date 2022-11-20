@@ -7,7 +7,7 @@
 
 	<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700&display=swap" rel="stylesheet">
 
-	<link rel="stylesheet" href="../static/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" href="../static/css/font-awesome.min.css"> -->
 	
 	<link rel="stylesheet" href="../static/css/style_login.css">
 	<!-- CSS only -->
@@ -28,22 +28,33 @@
 				<div class="col-md-6 col-lg-4">
 					<div class="login-wrap p-0">
 						<h3 class="mb-4 text-center">Register</h3>
-		      				<form action="#" class="signin-form">
+
+				
+		      				<form action="/add"  method="post">
+								{% with messages = get_flashed_messages()  %} 
+								<!-- declare a variable called messages -->
+								
+								{% if messages %}                            <!-- check if there are any messages -->
+									{% for message in messages %}            <!-- loop through the messages -->
+										<p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+									{% endfor %}
+								{% endif %}
+							{% endwith %}
 								<div class="form-group">
-									<input type="text" class="form-control text-dark" placeholder=" your first name" required>
+									<input type="text" class="form-control text-dark" name="first_name" placeholder=" your first name" >
 								</div>
 								<div class="form-group">
-									<input type="text" class="form-control" placeholder=" your last name" required>
+									<input type="text" class="form-control text-dark" name="last_name" placeholder=" your last name" >
 								</div>
 		      					<div class="form-group">
-		      						<input type="text" class="form-control" placeholder=" your E-mail" required>
+		      						<input type="text" class="form-control text-dark" name="email" placeholder=" your E-mail" >
 		      					</div>
 	            				<div class="form-group">
-	              					<input id="password-field" type="password" class="form-control" placeholder="Password" required>
+	              					<input id="password-field" type="password" class="form-control text-dark" name="password" placeholder="Password" >
 	              					<span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
 	           					</div>
 								   <div class="form-group">
-									<input type="text" class="form-control" placeholder=" confirm your password" required>
+									<input type="password" class="form-control text-dark" name="confirm_password" placeholder=" confirm your password" >
 								</div>
 	            				<div class="form-group">
 	            					<button type="submit" class="form-control btn btn-primary submit px-3">Sign In</button>

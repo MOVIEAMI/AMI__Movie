@@ -24,8 +24,9 @@
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#!">Logout</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/home">Home</a></li>
+                        
+                        <li class="nav-item"><a class="nav-link" href="/book_tikect/1">Logout</a></li>
                     </ul>
                 </div>
             </div>
@@ -38,17 +39,30 @@
                       <div class="card mb-3" style="max-width: 800px ; ">
                         <div class="row g-0">
                           <div class="col-md-4">
-                            <img src="..\static\img\THE LORD OF THE RINGS.jpg" class="img-fluid rounded-start" alt="...">
+                            <img src="{{one_film.url_image}}" class="img-fluid rounded-start" alt="...">
                           </div>
                           <div class="col-md-8">
                             <div class="card-body">
-                              <h5 class="card-title">THE LORD OF THE RINGS</h5>
-                              <p class="card-text">This is a wider card with supporting text below aSauron's armiesth, the capital of GondorSauron's armies attacked Minas Tirith, the capital of GondorSauron's armies attacked Minas Tirith, the capital of Gondorss a natural lead-in to additional content. This content is a little bit longer.</p>
-                              <h4>place : </h4>
-                              <h4>Time : </h4>
+                              <h5 class="card-title">{{one_film.name_film}}</h5>
+                              <h6 class="card-title"> By {{one_film.director_name}}</h6>
+                              <p class="card-text">{{one_film.description}}</p>
+                              <h4>place : {{one_film.price}} DT </h4>
+                              <h4>Time : {{one_film.broadcast_date.strftime('%Y-%m-%d')}}  </h4>
                               <h4>Price :  $15 </h4>
                               <div class="d-grid gap-2 d-md-block">
-                                <button  class="btn btn-primary" type="button">Buy</button>
+                                <form action="/film/reservation" method="post">
+
+                                  <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" name="nb_reservation">
+                                    <option selected value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                  </select>
+                                  
+                                  <input type="hidden" name="user_id" value={{one_user.id}}> 
+                                  <input type="hidden" name="film_id" value={{one_film.id}}> 
+                                  
+                                <input  class="btn btn-primary" type="submit" value="Buy">
+                              </form>
                               </div>
                             </div>
                             

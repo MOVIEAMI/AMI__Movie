@@ -1,0 +1,146 @@
+<!--
+=========================================================
+* Material Dashboard 2 - v3.0.4
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+  Dashboard 
+  </title>
+  
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../static/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<script src="/flask_app/static/script/script.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><h5>{{one_user.first_name}}</h5></li>
+            
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Reservation </h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group input-group-outline">
+              <label class="form-label"></label>
+              <input type="hidden" class="form-control">
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="#">AMI movies</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="/logout" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none" >Sign out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container d-flex">
+    <div class="container d-flex">
+                <!-- left -->
+                <div class="container-fluid py-4 d-flex ml-0">
+                    <div class="card d-flex">
+                        <div class="card-body">
+                        
+                          <a href="/add/film" class="btn btn-primary">add new film </a>
+                        </div>
+        
+                        
+                      <div>
+                        <div class="card">
+                          <div class="card-body">
+                            
+                            <a href="/dashbord" class="btn btn-primary">Dashboard</a>
+                          </div>
+                        </div>
+                      
+                    </div>
+                    </div>
+                </div>
+        </div>
+        <!-- FILMSLAES -->
+        <div class="container-fluid py-4 d-flex ml-2" style="width :1200 px">
+            <div class="card d-flex">
+              <div  class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-dark table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col"> Film Name</th>
+                    <th scope="col">buyed by</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">number of ticktets buyed</th>
+                    <th scope="col">screening  Date </th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {%for film in all_sales%}
+                <tr>
+
+                <td>{{film.name_film}}</td>
+                
+                <td>{{film.first_name}}</td>
+                <td>{{film.email}}</td>
+                <th>{{film.nb_reservation}}</th>
+                <th>{{film.broadcast_date}}</th>
+                <!-- <th><a href="#" class="btn btn-primary"></a></th> -->
+                
+                </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+              </div>
+            </div>
+
+        </div>
+      </div>
+  </main>
+  <!--   Core JS Files   -->
+  <script src="../static/assets/js/core/popper.min.js"></script>
+  <script src="../static/assets/js/core/bootstrap.min.js"></script>
+  <script src="../static/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="../static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../static/assets/js/plugins/chartjs.min.js"></script>
+  <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+  </script>
+
+
+</body>
+
+</html>

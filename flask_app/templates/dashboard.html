@@ -1,0 +1,211 @@
+<!--
+=========================================================
+* Material Dashboard 2 - v3.0.4
+=========================================================
+
+* Product Page: https://www.creative-tim.com/product/material-dashboard
+* Copyright 2022 Creative Tim (https://www.creative-tim.com)
+* Licensed under MIT (https://www.creative-tim.com/license)
+* Coded by Creative Tim
+
+=========================================================
+
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+  Dashboard 
+  </title>
+  
+  <!-- Font Awesome Icons -->
+  <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+  
+  <!-- CSS Files -->
+  <link id="pagestyle" href="../static/css/material-dashboard.css?v=3.0.4" rel="stylesheet" />
+
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<script src="/flask_app/static/script/script.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="g-sidenav-show  bg-gray-200">
+  <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
+    <!-- Navbar -->
+    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+      <div class="container-fluid py-1 px-3">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+            <li class="breadcrumb-item text-sm"><h5>{{one_user.first_name}}</h5></li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><h5><a class=" text-dark" href="javascript:;">Setting</a></h5></li>
+          </ol>
+          <h6 class="font-weight-bolder mb-0">Dashboard</h6>
+        </nav>
+        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+            <div class="input-group input-group-outline">
+              <label class="form-label">Type here...</label>
+              <input type="text" class="form-control">
+            </div>
+          </div>
+          <ul class="navbar-nav  justify-content-end">
+            <li class="nav-item d-flex align-items-center">
+              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="#">AMI movies</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <a href="/logout" class="nav-link text-body font-weight-bold px-0">
+                <i class="fa fa-user me-sm-1"></i>
+                <span class="d-sm-inline d-none" >Sign out</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- End Navbar -->
+    <div class="container d-flex">
+        <!-- left -->
+        <div class="container-fluid py-4 d-flex ml-0">
+            <div class="card d-flex">
+                <div class="card-body">
+                  <h5 class="card-title">Dashboard</h5>
+                  
+                  <a  href="/add/film" class="btn btn-primary" >  add new film </a> 
+                </div>
+
+                
+              <div>
+                <div class="card">
+                  <div class="card-body">
+                    
+                    <a href="/filmsales" class="btn btn-primary">reservation</a>
+                  </div>
+                </div>
+              
+            </div>
+            </div>
+        </div>
+
+
+        <div class="container-fluid py-4 d-flex ml-2" style="width :1200 px">
+            <div class="card d-flex">
+              <div  class="table-wrapper-scroll-y my-custom-scrollbar">
+                <table class="table table-dark table-striped mb-0">
+                <thead>
+                  <tr>
+                    <th scope="col"> Film Name</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Director Name</th>
+                    <th scope="col">screening  Date </th>
+                    <th scope="col">Movie theater</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  {%for film in all_show%}
+                <tr>
+                
+                <td>{{film.name_film}}</td>
+                <td>{{film.name_category}}</td>
+                <td>{{film.director_name}}</td>
+                <th>{{film.broadcast_date}}</th>
+                <th>{{film.broadcast_room}}</th>
+                <!-- <th><a href="#" class="btn btn-primary"></a></th> -->
+                <th>
+                  <a class="btn btn-primary" href="/update/film/{{film.id}}"> Update</a>
+                  <a class="btn btn-danger" href="/destroy/film/{{film.id}}"> Delete</a></th>
+                  
+                </tr>
+                {% endfor %}
+                </tbody>
+                </table>
+              </div>
+            </div>
+
+        </div>
+          <!-- rigt -->
+          <!------------------------------------------
+                    form add new film 
+          -------------------------------------------->
+          
+          <div class="form-popup" id="my_form">
+            <form action="/create/film" method="post" class="p-5 form-container">
+              <H3>New Film</H3>
+              {% with messages = get_flashed_messages(category_filter=["films"])  %} 
+                  <!-- declare a variable called messages -->
+                  
+                  {% if messages %}                            <!-- check if there are any messages -->
+                      {% for message in messages %}            <!-- loop through the messages -->
+                          <p>{{message}}</p>                   <!-- display each message in a paragraph tag -->
+                      {% endfor %}
+                  {% endif %}
+              {% endwith %}
+              <div >
+                  <label class="form-label bg-light text-danger" id="inputGroup-sizing-default">name </label>
+                  <input type="text" class="form-control" aria-label="Sizing example input" name="name_film" aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div>
+                  <label class="form-label bg-light text-danger" id="inputGroup-sizing-default">director name</label>
+                  <input type="text" class="form-control" aria-label="Sizing example input" name="director_name" aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div >
+                  <label class="form-label bg-light text-danger" id="inputGroup-sizing-default">price</label>
+                  <input type="text" class="form-control" aria-label="Sizing example input" name="price" aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div >
+                  <label class="form-label bg-light text-danger" id="inputGroup-sizing-default">URL image </label>
+                  <input type="text" class="form-control" aria-label="Sizing example input" name="url_image" aria-describedby="inputGroup-sizing-default">
+              </div>
+              <div >
+                <label for="floatingTextarea2" class="form-label bg-light text-danger" >About:</label>
+                  <textarea class="form-control" placeholder="Leave a comment here" name="description" id="floatingTextarea2" style="height: 100px"></textarea>
+                  
+                </div>
+                <div class="mb-3 opacity-50">
+                  <label for="disabledSelect" class="form-label bg-light text-danger o" >sale</label>
+                  <select id="disabledSelect" name="broadcast_room" class="form-select">
+                  <option value="colisee">colisee</option>
+                  <option value="abc">abc</option>
+                  </select>
+              </div>
+              <div class="mb-3">
+                  <label for="disabledSelect"  class="form-label bg-light text-danger">category</label>
+                  <select id="disabledSelect" name="category_id" class="form-select">
+                  <option selected value="1">Action</option>
+                  <option value="3">comedy</option>
+                  <option value="2">horrer</option>
+                  </select>
+              </div>
+              <div  class="mb-3">
+                  <input type="datetime-local" id="meeting-time"
+                          name="broadcast_date" value="2022-11-17T19:30"
+                              min="2022-11-16sT00:00" max="2050-12-30sT00:00">
+              </div>
+              <button type="submit" class="btn bg-light text-danger">add</button>
+          </form>
+          </div>
+
+  </main>
+  <!--   Core JS Files   -->
+  <!-- <script src="../static/assets/js/core/popper.min.js"></script> -->
+  <!-- <script src="../static/assets/js/core/bootstrap.min.js"></script> -->
+  <!-- <script src="../static/assets/js/plugins/perfect-scrollbar.min.js"></script> -->
+  <!-- <script src="../static/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="../static/assets/js/plugins/chartjs.min.js"></script> -->
+  <!-- <script>
+    var ctx = document.getElementById("chart-bars").getContext("2d");
+  </script> -->
+  <script type="text/javascript" src="{{ url_for('static', filename='../js/dashboard.js') }}"></script>
+
+
+</body>
+
+</html>

@@ -3,12 +3,14 @@ from flask import flash
 import re	  
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 
+
 class User:
     db_name='ami_mouvies_schemas'
     def __init__(self,data):
         self.id = data['id']
         self.first_name = data['first_name']
         self.last_name = data['last_name']
+        self.password = data['password']
         self.email = data['email']
         self.user_type = data['user_type']
         self.created_at = data['created_at']
@@ -55,24 +57,24 @@ class User:
         query="SELECT * FROM users WHERE email = %(email)s ;"
         result = connectToMySQL(User.db_name).query_db(query,data)
         if len(result)>=1:
-            flash("Email Already Exist", 'email')
+            flash("Email Already Exist")
             is_valid = False
         if not EMAIL_REGEX.match(data['email']): 
-            flash("Incorrect Email", 'email')
+            flash("Incorrect Email")
             print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
             is_valid = False
         if len(data['first_name']) < 2:
             print("wronnnnnnnnnnnnnnnnnnnng")
-            flash("first Name must be at least 2 characters.",'email' )
+            flash("first Name must be at least 2 characters." )
             is_valid = False
         if len(data['last_name']) < 2:
-            flash("last name must be at least 2 characters.", 'email')
+            flash("last name must be at least 2 characters.")
             is_valid = False
         if len(data['password']) < 3:
-            flash("password must be at least 8 characters.", 'email')
+            flash("password must be at least 8 characters.")
             is_valid = False
         if data['password'] != data['confirm_password']:
-            flash("Passwords don't match","email")
+            flash("Passwords don't match")
             is_valid = False
         return is_valid
 
@@ -89,12 +91,14 @@ class User:
             flash("Incorrect Email", 'email')
             is_valid = False
         if len(data['first_name']) < 2:
-            flash("first Name must be at least 2 characters.",'email' )
+            flash("first Name must be at least 2 characters." )
             is_valid = False
         if len(data['last_name']) < 2:
-            flash("last name must be at least 2 characters.", 'email')
+            flash("last name must be at least 2 characters.")
             is_valid = False
         return is_valid
 
 
         #-----------------------------------
+        # -------------------------------------------------------------------------logout admin 
+    
